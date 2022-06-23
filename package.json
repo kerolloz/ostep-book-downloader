@@ -17,7 +17,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.5",
     "dotenv": "^8.2.0",
-    "got": "^11.8.1",
+    "got": "^11.8.5",
     "pdf-merger-js": "^3.0.5",
     "spinnies": "^0.5.1"
   },
