@@ -1,6 +1,6 @@
 # OSTEP Book Downloader
 
-> This script will download the OSTEP book chapters from its main [page](pages.cs.wisc.edu/~remzi/OSTEP/) then **merge** them into one PDF.
+> This script will download the OSTEP book chapters from its main [page](https://pages.cs.wisc.edu/~remzi/OSTEP/) then **merge** them into one PDF.
 
 
 ## Usage
