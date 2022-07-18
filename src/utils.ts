@@ -27,6 +27,7 @@ export async function downloadFile(url: string, fileName: string): Promise<void>
     await pipeline(downloadStream, fileWriterStream);
     console.log(`File downloaded to ${fileName}`);
   } catch (error) {
-    console.error(`Something went wrong. ${error.message}`);
+    console.error('Something went wrong.');
+    console.error(error);
   }
 }
