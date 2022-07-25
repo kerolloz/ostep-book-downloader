@@ -3,6 +3,7 @@ import { createWriteStream } from 'fs';
 import got from 'got';
 import stream from 'stream';
 import { promisify } from 'util';
+import Logger from './Logger';
 
 const pipeline = promisify(stream.pipeline);
 
@@ -21,13 +22,14 @@ export async function crawl(url: string): Promise<cheerio.Root> {
 }
 
 export async function downloadFile(url: string, fileName: string): Promise<void> {
+  Logger.log(fileName, `Downloading ${fileName}...`);
   const downloadStream = got.stream(url);
   const fileWriterStream = createWriteStream(fileName);
   try {
     await pipeline(downloadStream, fileWriterStream);
-    console.log(`File downloaded to ${fileName}`);
+    Logger.success(fileName, `File "${fileName}" downloaded successfully!`);
   } catch (error) {
-    console.error('Something went wrong.');
+    Logger.fail(fileName, `Failed to download "${fileName}"`);
     console.error(error);
   }
 }

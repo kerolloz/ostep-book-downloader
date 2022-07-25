@@ -1,13 +1,14 @@
 import fs from 'fs';
 import PDFMerger from 'pdf-merger-js';
+import Logger from './Logger';
 import { crawl, downloadFile } from './utils';
 
 (async () => {
   const MAX_NUM = 1000;
-  const OSTEP_ROOT = 'http://pages.cs.wisc.edu/~remzi/OSTEP/';
+  const OSTEP_ROOT = 'https://pages.cs.wisc.edu/~remzi/OSTEP/';
   const bookTableSelector = 'html body center table tbody tr td center p table tbody';
 
-  console.log('Scraping OSTEP page...');
+  Logger.log('scraping', 'Scraping OSTEP page...');
   const $ = await crawl(OSTEP_ROOT);
   const chapters = $(bookTableSelector)
     .find('td')
@@ -19,17 +20,17 @@ import { crawl, downloadFile } from './utils';
   const initialChapters = chapters.splice(prefaceIdx, 2); // preface && TOC
   chapters.unshift(...initialChapters); // move (preface && TOC) chapters to the beginning
 
-  console.log('Downloading PDF chapters...');
+  Logger.success('scraping', 'OSTEP page scraped successfully!');
+
+  Logger.log('PDF', 'Downloading PDF chapters...');
   // wait until all the chapters have been downloaded
   await Promise.all(chapters.map((obj, i) => downloadFile(OSTEP_ROOT + obj.href, `${i}.pdf`)));
+  Logger.success('PDF', 'PDF chapters downloaded successfully!');
 
-  console.log('Merging chapters...');
+  Logger.log('merging', 'Merging PDF chapters into one PDF file...');
   const merger = new PDFMerger();
   chapters.forEach((_, i) => merger.add(`${i}.pdf`));
   await merger.save('OSTEP.pdf');
-
-  console.log('Cleanup...');
   chapters.forEach((_, i) => fs.unlinkSync(`${i}.pdf`));
-
-  console.log('Done!');
+  Logger.success('merging', 'PDF file merged successfully! (OSTEP.pdf)');
 })();
