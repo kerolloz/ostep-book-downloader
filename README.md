@@ -17,4 +17,8 @@
 
 Run `npm start` :sparkles:!
 
-![Demo](https://i.imgur.com/EfcJcSy.gif)
+<p align="center">
+  <picture>
+    <img  src="https://user-images.githubusercontent.com/36763164/180813641-346eae7d-74c1-4e74-acb6-6a9764a5032a.gif"/>
+  </picture>
+</p>
