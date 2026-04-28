@@ -17,7 +17,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
     "got": "^12.5.3",
-    "pdf-merger-js": "^3.4.0",
+    "pdf-merger-js": "^5.1.2",
     "spinnies": "^0.5.1"
   },
   "devDependencies": {
